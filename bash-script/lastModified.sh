@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 echo -n "Enter name of the file: "
 read fileName
 if [ -f $fileName ]

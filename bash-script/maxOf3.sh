@@ -9,7 +9,7 @@ read num2
 echo -n "Enter Num3: "
 read num3
 
-echo "The Maximum number is: "
+echo -n "The Maximum number is: "
 if [ $num1 -gt $num2 ] && [ $num1 -gt $num3 ]
 then
     echo $num1
