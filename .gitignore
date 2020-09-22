@@ -1,0 +1,8 @@
+# build files for java
+*.class
+
+# build file for c++
+a.exe
+
+# build folder
+*/build
