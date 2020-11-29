@@ -2,7 +2,7 @@
 *.class
 
 # build file for c++
-a.exe
+*.exe
 
 # build folder
 */build
