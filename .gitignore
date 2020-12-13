@@ -1,8 +1,15 @@
 # build files for java
 *.class
 
-# build file for c++
+# build file for c and c++
 *.exe
+*.c~
+*.c~~
+.*
 
 # build folder
 */build
+
+# VSCode
+.vscode/
+.editorconfig
