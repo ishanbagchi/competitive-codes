@@ -45,7 +45,7 @@ class RemoveFromArray {
 
 class InsertInArray {
     public static void main(String[] args) {
-        int len, p, ele;
+        int len, ele;
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter length of an array: ");
         len = sc.nextInt();
@@ -63,5 +63,46 @@ class InsertInArray {
         }
         System.out.print(arr[len]);
 
+    }
+}
+
+class ReverseArray {
+    public static void main(String[] args) {
+        int len, temp;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the length of the array: ");
+        len = sc.nextInt();
+        int arr[] = new int[len];
+        System.out.println("Enter the elements: ");
+        for (int i = 0; i < len; i++) {
+            System.out.print("Enter " + i + "th element: ");
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("The Original Array: " + Arrays.toString(arr));
+
+        for (int i = 0; i < len / 2; i++) {
+            temp = arr[i];
+            arr[i] = arr[len - i - 1];
+            arr[len - i - 1] = temp;
+        }
+        System.out.println("The Reversed Array: " + Arrays.toString(arr));
+    }
+}
+
+class PrintMatrix {
+    public static void main(String[] args) {
+        int len;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter the length of the array: ");
+        len = sc.nextInt();
+        int arr[][] = new int[len][len];
+
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                arr[i][j] = (int) (Math.random() * 10);
+                System.out.print(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
