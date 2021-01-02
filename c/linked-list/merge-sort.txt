@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+void append(struct node **head_ref, int data)
+{
+    struct node *new_node = (struct node *)malloc(sizeof(struct node));
+    struct node *last = *head_ref;
+
+    new_node->data = data;
+    new_node->next = NULL;
+
+    if (*head_ref == NULL)
+    {
+        *head_ref = new_node;
+        return;
+    }
+
+    while (last->next != NULL)
+        last = last->next;
+
+    last->next = new_node;
+    return;
+}
+
+void printList(struct node *head_ref)
+{
+    while (head_ref != NULL)
+    {
+        printf("'%d' ", head_ref->data);
+        head_ref = head_ref->next;
+    }
+    printf("\n");
+}
+
+struct node *sortedMerge(struct node *a, struct node *b);
+void frontBackSplit(struct node *source, struct node **front_ref, struct node **back_ref);
+
+void mergeSort(struct node **head_ref)
+{
+    struct node *head = *head_ref;
+    struct node *a;
+    struct node *b;
+
+    if ((head == NULL) || (head->next == NULL))
+        return;
+
+    frontBackSplit(head, &a, &b);
+
+    mergeSort(&a);
+    mergeSort(&b);
+    *head_ref = sortedMerge(a, b);
+    return;
+}
+
+void frontBackSplit(struct node *source, struct node **front_ref, struct node **back_ref)
+{
+    struct node *slow;
+    struct node *fast;
+    slow = source;
+    fast = source->next;
+
+    while (fast != NULL)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+        {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+
+    *front_ref = source;
+    *back_ref = slow;
+    slow->next = NULL;
+    return;
+}
+
+struct node *sortedMerge(struct node *a, struct node *b)
+{
+    struct node *result = NULL;
+
+    if (a == NULL)
+        return (b);
+    else if (b == NULL)
+        return (a);
+
+    if (a->data <= b->data)
+    {
+        result = a;
+        result->next = sortedMerge(a->next, b);
+    }
+    else
+    {
+        result = b;
+        result->next = sortedMerge(a, b->next);
+    }
+    return (result);
+}
+
+int main()
+{
+    struct node *head = NULL;
+
+    append(&head, 11);
+    append(&head, 22);
+    append(&head, 77);
+    append(&head, 44);
+    append(&head, 33);
+
+    printf("Original List: ");
+    printList(head);
+
+    mergeSort(&head);
+    printf("Sorted list: ");
+    printList(head);
+
+    return 0;
+}
